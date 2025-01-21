@@ -39,7 +39,7 @@
     z-index: 1200;
     flex-direction: column;
     cursor: pointer;
-    padding: 10px;
+    
   }
   
   .hamburger div {
@@ -263,7 +263,6 @@
     text-decoration: none;
     text-shadow: 2px 2px 3px #000000da;
     display: flex;
-    
   }
   
   /* Search Container Styles */
