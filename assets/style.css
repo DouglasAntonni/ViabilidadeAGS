@@ -86,7 +86,16 @@
     z-index: 1100;
     transition: var(--transition);
   }
-  
+  .no-results{
+    color: var(--error);
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: 500;
+    background: rgba(255, 76, 76, 0.1);
+    border-radius: 4px;
+    text-align: center;
+
+  }
   .nav-links.active {
     display: flex;
   }
@@ -215,7 +224,20 @@
     text-shadow: 2px 2px 3px #000000da;
    
   }
-  
+  .stateh1 {
+    font-size: 3em; /* Ajuste conforme necessário */
+    font-weight: bold;
+    background: linear-gradient(130deg, var(--primary), var(--secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    
+  }
+  .searchp{
+    text-align: center;
+    color: var(--secondary) ;
+  }
   /* Navbar Styles */
   .navbar {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -240,6 +262,8 @@
     font-weight: 600;
     text-decoration: none;
     text-shadow: 2px 2px 3px #000000da;
+    display: flex;
+    
   }
   
   /* Search Container Styles */
@@ -387,19 +411,25 @@
     padding: 1.5rem 0 0.5rem;
     margin-top: 2rem;
   }
-  
+ 
+  .logo-footer{
+    width: 13rem;
+    
+  }
   .footer-content {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 3fr 3fr;
     gap: 2rem;
     align-items: center;
+    text-align: center;
   }
   
   .footer-section {
     margin-bottom: 0.5rem;
+    align-items: center;
   }
   
   .footer-section h3 {
@@ -408,6 +438,7 @@
     margin-bottom: 0.8rem;
     font-weight: 600;
     text-shadow: 2px 2px 3px #000000;
+    
   }
   
   .footer-section p,
@@ -438,12 +469,7 @@
     border-radius: 4px;
     text-align: center;
   }
-  .logo{
-    
-    filter: drop-shadow(2px 2px 1px rgb(97, 97, 97));
-    width: 30rem;
   
-  }
   
   /* Responsive Adjustments */
   @media (max-width: 768px) {
