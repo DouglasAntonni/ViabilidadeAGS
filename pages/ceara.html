@@ -24,41 +24,56 @@
       const [menuOpen, setMenuOpen] = React.useState(false);
       const [resultsCount, setResultsCount] = React.useState(0);
       const [hasSearched, setHasSearched] = React.useState(false);
+
       const handleSearch = async (searchParams) => {
-  setLoading(true);
-  setError(null);
-  setVisibleResults(20);
-  setHasSearched(true);
+        setLoading(true);
+        setError(null);
+        setVisibleResults(20);
+        setHasSearched(true);
 
-  try {
-    const response = await fetch('DB/dataCE.json');
+        try {
+          const [response1, response2] = await Promise.all([
+            fetch('DB/dataCE1.json'),
+            fetch('DB/dataCE2.json'),
+           
+          ]);
 
-    if (!response.ok) {
-      throw new Error('Error loading data');
-    }
+          if (!response1.ok || !response2.ok) {
+            throw new Error('Error loading data');
+          }
 
-    const data = await response.json();
+          const [data1, data2, data3, data4] = await Promise.all([
+            response1.json(),
+            response2.json(),
+            
+          ]);
 
-    const filtered = (data.Worksheet || []).filter((row) => {
-      const cep = searchParams.cep.replace(/\D/g, '');
-      return (
-        (!cep || (row.CEP && row.CEP.toString().includes(cep))) &&
-        (!searchParams.rua || (row.LOGRADOURO && row.LOGRADOURO.toLowerCase().includes(searchParams.rua.toLowerCase()))) &&
-        (!searchParams.bairro || (row.BAIRRO && row.BAIRRO.toLowerCase().includes(searchParams.bairro.toLowerCase()))) &&
-        (!searchParams.cidade || (row.CIDADE && row.CIDADE.toLowerCase().includes(searchParams.cidade.toLowerCase()))) &&
-        (!searchParams.numero || (row.NUMERO && row.NUMERO.toString().includes(searchParams.numero)))
-      );
-    });
+          const combinedData = [
+            ...(data1.Worksheet || []),
+            ...(data2.Worksheet || []),
+            
+          ];
 
-    setResults(filtered);
-    setResultsCount(filtered.length);
-  } catch (err) {
-    setError('Error searching addresses. Please try again.');
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-};
+          const filtered = combinedData.filter((row) => {
+            const cep = searchParams.cep.replace(/\D/g, '');
+            return (
+              (!cep || (row.CEP && row.CEP.toString().includes(cep))) &&
+              (!searchParams.rua || (row.LOGRADOURO && row.LOGRADOURO.toLowerCase().includes(searchParams.rua.toLowerCase()))) &&
+              (!searchParams.bairro || (row.BAIRRO && row.BAIRRO.toLowerCase().includes(searchParams.bairro.toLowerCase()))) &&
+              (!searchParams.cidade || (row.CIDADE && row.CIDADE.toLowerCase().includes(searchParams.cidade.toLowerCase()))) &&
+              (!searchParams.numero || (row.NUMERO && row.NUMERO.toString().includes(searchParams.numero)))
+            );
+          });
+
+          setResults(filtered);
+          setResultsCount(filtered.length);
+        } catch (err) {
+          setError('Error searching addresses. Please try again.');
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
+      };
 
       const loadMore = () => {
         setVisibleResults((prev) => prev + 20);
