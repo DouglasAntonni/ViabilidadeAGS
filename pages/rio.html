@@ -32,26 +32,40 @@
         setHasSearched(true);
 
         try {
-          const [response1, response2] = await Promise.all([
+          const [response1, response2, response3, response4, response5, response6, response7] = await Promise.all([
             fetch('DB/dataRJ.json'),
             fetch('DB/dataRJ2.json'),
+            fetch('DB/dataRJ3.json'),
+            fetch('DB/dataRJ4.json'),
+            fetch('DB/dataRJ5.json'),
+            fetch('DB/dataRJ6.json'),
+            fetch('DB/dataRJ7.json'),
            
           ]);
 
-          if (!response1.ok || !response2.ok) {
+          if (!response1.ok || !response2.ok || !response3.ok || !response4.ok || !response5.ok || !response6.ok || !response7.ok) {
             throw new Error('Error loading data');
           }
 
-          const [data1, data2] = await Promise.all([
+          const [data1, data2, data3, data4, data5, data6, data7] = await Promise.all([
             response1.json(),
             response2.json(),
-          
+            response3.json(),
+            response4.json(),
+            response5.json(),
+            response6.json(),
+            response7.json(),
+            
           ]);
 
           const combinedData = [
             ...(data1.Worksheet || []),
             ...(data2.Worksheet || []),
-            
+            ...(data3.Worksheet || []),
+            ...(data4.Worksheet || []),
+            ...(data5.Worksheet || []),
+            ...(data6.Worksheet || []),
+            ...(data7.Worksheet || []), 
           ];
 
           const filtered = combinedData.filter((row) => {

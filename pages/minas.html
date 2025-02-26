@@ -32,25 +32,37 @@
         setHasSearched(true);
 
         try {
-          const [response1, response2] = await Promise.all([
+          const [response1, response2, response3, response4, response5, response6] = await Promise.all([
             fetch('DB/dataMG.json'),
             fetch('DB/dataMG2.json'),
+            fetch('DB/dataMG3.json'),
+            fetch('DB/dataMG4.json'),
+            fetch('DB/dataMG5.json'),
+            fetch('DB/dataMG6.json'),
            
           ]);
 
-          if (!response1.ok || !response2.ok) {
+          if (!response1.ok || !response2.ok || !response3.ok || !response4.ok || !response5.ok || !response6.ok) {
             throw new Error('Error loading data');
           }
 
-          const [data1, data2, data3, data4] = await Promise.all([
+          const [data1, data2, data3, data4, data5, data6] = await Promise.all([
             response1.json(),
             response2.json(),
+            response3.json(),
+            response4.json(),
+            response5.json(),
+            response6.json(),
             
           ]);
 
           const combinedData = [
             ...(data1.Worksheet || []),
             ...(data2.Worksheet || []),
+            ...(data3.Worksheet || []),
+            ...(data4.Worksheet || []),
+            ...(data5.Worksheet || []),
+            ...(data6.Worksheet || []),
             
           ];
 
