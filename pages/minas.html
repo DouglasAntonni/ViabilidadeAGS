@@ -170,6 +170,10 @@
       const handleChange = (e) => {
         const { id, value } = e.target;
         let formattedValue = value;
+        
+
+// Remove caracteres específicos (exemplo: "ç" e outros acentos)
+formattedValue = formattedValue.replace(/[çÇáéíóúàèìòùãõâêîôûäëïöü]/g, '');
         if (id === 'cep') {
           formattedValue = value.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2');
         }
@@ -182,15 +186,17 @@
             <h1 >CONSULTA DE VIABILIDADE</h1>
             </div>
             <h1 class="stateh1">MINAS GERAIS</h1>
+            
           <form onSubmit={handleSubmit}>
             <input type="text" id="cep" placeholder="CEP" maxLength="9" value={formData.cep} onChange={handleChange} />
             <input type="text" id="numero" placeholder="Número" value={formData.numero} onChange={handleChange} />
             <input type="text" id="rua" placeholder="Rua" value={formData.rua} onChange={handleChange} />
             <input type="text" id="bairro" placeholder="Bairro" value={formData.bairro} onChange={handleChange} />
-            <input type="text" id="cidade" placeholder="Cidade" value={formData.cidade} onChange={handleChange} />
+            <input type="text" id="cidade" placeholder="Cidade" value={formData.cidade} onChange={handleChange}  />
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Buscando...' : 'Buscar'}
             </button>
+            
           </form>
           {formError && <div className="error-message">{formError}</div>}
         </div>
@@ -200,6 +206,7 @@
     const ResultsTable = ({ results, hasSearched }) => {
       if (!hasSearched) {
         return <p className="searchp">Nenhuma busca efetuada.</p>;
+        
       }
 
       if (!results.length) {

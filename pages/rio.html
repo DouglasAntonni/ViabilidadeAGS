@@ -172,6 +172,10 @@
       const handleChange = (e) => {
         const { id, value } = e.target;
         let formattedValue = value;
+        
+
+// Remove caracteres específicos (exemplo: "ç" e outros acentos)
+formattedValue = formattedValue.replace(/[çÇáéíóúàèìòùãõâêîôûäëïöü]/g, '');
         if (id === 'cep') {
           formattedValue = value.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2');
         }
