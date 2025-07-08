@@ -186,7 +186,7 @@ formattedValue = formattedValue.replace(/[çÇáéíóúàèìòùãõâêîôû
             <h1 >CONSULTA DE VIABILIDADE</h1>
             </div>
             <h1 class="stateh1">MINAS GERAIS</h1>
-            <p className="searchp">Data Referência: MAIO/2025</p>
+            <p className="searchp">Data Referência: JULHO/2025</p>
           <form onSubmit={handleSubmit}>
             <input type="text" id="cep" placeholder="CEP" maxLength="9" value={formData.cep} onChange={handleChange} />
             <input type="text" id="numero" placeholder="Número" value={formData.numero} onChange={handleChange} />
@@ -228,8 +228,8 @@ formattedValue = formattedValue.replace(/[çÇáéíóúàèìòùãõâêîôû
           <tbody>
             {results.map((row, index) => (
               <tr key={index}>
-                <td className={row.RESTRICAO === 'Não' || row.DESCRICAO === 'Viável' ? 'sim' : 'nao'}>
-                  {row.RESTRICAO === 'Não' || row.DESCRICAO === 'Viável' ? 'Sim' : 'Não'}
+                <td className={row.RESTRICAO === 'Não' || row.MOTIVO === 'Viável' ? 'sim' : 'nao'}>
+                  {row.RESTRICAO === 'Não' || row.MOTIVO === 'Viável' ? 'Sim' : 'Não'}
                 </td>
                 <td>{row.CEP || row.CEP_NUM || ''}</td>
                 <td>{row.CIDADE || ''}</td>
